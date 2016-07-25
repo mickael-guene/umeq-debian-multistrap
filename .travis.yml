@@ -2,5 +2,9 @@ sudo: required
 dist: trusty
 language: c
 
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq multistrap
+
 script:
   - ./build.sh
