@@ -1,0 +1,13 @@
+diff --git a/usr/sbin/multistrap b/usr/sbin/multistrap
+index b3c3acf..c900b07 100755
+--- a/usr/sbin/multistrap
++++ b/usr/sbin/multistrap
+@@ -986,7 +986,7 @@ sub native {
+        }
+        # reinstall set
+        foreach my $reinst (sort @reinstall) {
+-               system ("$str $env chroot $dir apt-get --reinstall -y $forceyes install $reinst");
++               system ("$str $env chroot $dir apt-get --reinstall -y install $reinst");
+        }
+        &run_native_hooks_end(sort @{$hooks{'N'}}) if (defined $hooks{'N'});
+        return $retval;
