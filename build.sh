@@ -13,4 +13,4 @@ for arch in ${ARCHS}; do
     done
 done
 
-ls -la *-debian-*
+ls -la ${SCRIPTDIR}/*-debian-*
