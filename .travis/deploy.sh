@@ -4,8 +4,10 @@
 SCRIPTDIR=`dirname $0`
 SCRIPTDIR=`(cd $SCRIPTDIR ; pwd)`
 
-#create working directory
-WDIR=`mktemp -d` && trap "rm -Rf $WDIR" EXIT
+#ARCHS="arm64 armhf"
+#VERSIONS="jessie testing"
+ARCHS="arm64"
+VERSIONS="jessie testing"
 
 #add deploy key
 cd ${SCRIPTDIR}
@@ -22,11 +24,6 @@ for arch in ${ARCHS}; do
 done
 
 #push rootfs
-#ARCHS="arm64 armhf"
-#VERSIONS="jessie testing"
-ARCHS="arm64"
-VERSIONS="jessie testing"
-
 for arch in ${ARCHS}; do
     for version in ${VERSIONS}; do
         . ${SCRIPTDIR}/deploy_common.sh ${arch} ${version} ${SCRIPTDIR}/../${arch}-debian-${version}.tgz
