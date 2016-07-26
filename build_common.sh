@@ -61,3 +61,5 @@ ln -sf ./${UMEQ} ${TMPDIR}/rootfs/usr/bin/${QEMU}
 
 #build rootfs
 tar -czf ${output} -C ${TMPDIR}/rootfs .
+
+cleanup

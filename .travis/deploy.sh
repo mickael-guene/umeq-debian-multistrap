@@ -17,31 +17,14 @@ ssh-add deploy_key
 rm deploy_key
 set -x
 
-#switch to tmp dir and setup new git repo
-cd ${WDIR}
-git init
-git config user.name ${GIT_USER_NAME}
-git config user.email ${GIT_USER_EMAIL}
-git remote add origin https://github.com/mickael-guene/arm64-debian
+#push rootfs
+#ARCHS="arm64 armhf"
+#VERSIONS="jessie testing"
+ARCHS="arm64"
+VERSIONS="jessie"
 
-#pull last commit
-git pull --depth=1 origin jessie
-git checkout -b jessie
-
-#create commit
-cp ${SCRIPTDIR}/arm64-debian-jessie.tgz .
-cat << EOF > Dockerfile
-FROM scratch
-MAINTAINER ${GIT_USER_NAME} <${GIT_USER_EMAIL}>
-
-ADD arm64-debian-jessie.tgz /
-
-CMD ["/usr/bin/umeq-arm64" "-execve" "-0" "bash" "/bin/bash"]
-EOF
-cp ${SCRIPTDIR}/arm64-debian-jessie.tgz .
-
-git add .
-git commit -m "Trig by original commit $TRAVIS_COMMIT"
-
-#push commit
-git push git@github.com:mickael-guene/arm64-debian jessie
+for arch in ${ARCHS}; do
+    for version in ${VERSIONS}; do
+        . ${SCRIPTDIR}/deploy_common.sh ${arch} ${version} ${SCRIPTDIR}/../${arch}-debian-${version}.tgz
+    done
+done
