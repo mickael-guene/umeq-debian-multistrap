@@ -12,3 +12,5 @@ for arch in ${ARCHS}; do
         . ${SCRIPTDIR}/build_common.sh ${arch} ${version} ${SCRIPTDIR}/${arch}-debian-${version}.tgz
     done
 done
+
+ls -la *-debian-*

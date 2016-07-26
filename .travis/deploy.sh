@@ -33,7 +33,7 @@ MAINTAINER ${GIT_USER_NAME} <${GIT_USER_EMAIL}>
 
 ADD arm64-debian-jessie.tgz /
 
-CMD ["/usr/bin/qemu-aarch64-static" "-execve" "-0" "bash" "/bin/bash"]
+CMD ["/usr/bin/umeq-arm64" "-execve" "-0" "bash" "/bin/bash"]
 EOF
 cp ${SCRIPTDIR}/arm64-debian-jessie.tgz .
 
