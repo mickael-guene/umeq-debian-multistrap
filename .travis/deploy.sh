@@ -21,7 +21,7 @@ set -x
 #ARCHS="arm64 armhf"
 #VERSIONS="jessie testing"
 ARCHS="arm64"
-VERSIONS="jessie"
+VERSIONS="jessie testing"
 
 for arch in ${ARCHS}; do
     for version in ${VERSIONS}; do

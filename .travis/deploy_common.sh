@@ -34,7 +34,7 @@ MAINTAINER ${GIT_USER_NAME} <${GIT_USER_EMAIL}>
 
 ADD ${arch}-debian-${version}.tgz /
 
-CMD ["/usr/bin/${UMEQ}" "-execve" "-0" "bash" "/bin/bash"]
+CMD ["/usr/bin/${UMEQ}", "-execve", "-0", "bash", "/bin/bash"]
 EOF
 cp ${tarball} .
 
