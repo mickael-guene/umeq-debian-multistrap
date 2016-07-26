@@ -10,11 +10,13 @@ WDIR=`mktemp -d` && trap "rm -Rf $WDIR" EXIT
 #add deploy key
 set +x
 cd ${SCRIPTDIR}
-openssl aes-256-cbc -K $encrypted_f1bb190f457f_key -iv $encrypted_f1bb190f457f_iv -in deploy_key.enc -out deploy_key -d
-chmod 600 deploy_key
-eval `ssh-agent -s`
-ssh-add deploy_key
-rm deploy_key
+for arch in ${ARCHS}; do
+    openssl aes-256-cbc -K $encrypted_f1bb190f457f_key -iv $encrypted_f1bb190f457f_iv -in deploy_key_${arch}.enc -out deploy_key -d
+    chmod 600 deploy_key
+    eval `ssh-agent -s`
+    ssh-add deploy_key
+    rm deploy_key
+done
 set -x
 
 #push rootfs
