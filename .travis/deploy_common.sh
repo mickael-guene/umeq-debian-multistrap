@@ -42,7 +42,7 @@ EOF
 ## Dockerfile
 cat << EOF > Dockerfile
 FROM scratch
-MAINTAINER ${GIT_USER_NAME} <${GIT_USER_EMAIL}>
+MAINTAINER Mickael Guene <mickael.guene@st.com>
 
 ADD ${arch}-debian-${version}.tgz /
 ADD configure.sh /configure.sh
