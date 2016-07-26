@@ -28,14 +28,29 @@ git pull --depth=1 origin ${version}
 git checkout -b ${version}
 
 #create commit
+## configure script
+cat << EOF > configure.sh
+#!/bin/bash -ex
+
+export DEBIAN_FRONTEND=noninteractive
+export DEBCONF_NONINTERACTIVE_SEEN=true
+export LC_ALL=C LANGUAGE=C LANG=C
+/var/lib/dpkg/info/dash.preinst install
+dpkg --configure -a
+rm /configure.sh
+EOF
+## Dockerfile
 cat << EOF > Dockerfile
 FROM scratch
 MAINTAINER ${GIT_USER_NAME} <${GIT_USER_EMAIL}>
 
 ADD ${arch}-debian-${version}.tgz /
+ADD configure.sh /configure.sh
+RUN ["/usr/bin/${UMEQ}", "-execve", "-0", "bash", "/bin/bash", "-c", "/configure.sh"]
 
 CMD ["/usr/bin/${UMEQ}", "-execve", "-0", "bash", "/bin/bash"]
 EOF
+## rootfs
 cp ${tarball} .
 
 git add .

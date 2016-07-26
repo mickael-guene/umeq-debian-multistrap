@@ -6,7 +6,7 @@ SCRIPTDIR=`(cd $SCRIPTDIR ; pwd)`
 
 #ARCHS="arm64 armhf"
 #VERSIONS="jessie testing"
-ARCHS="arm64"
+ARCHS="arm64 armhf"
 VERSIONS="jessie testing"
 
 #add deploy key
