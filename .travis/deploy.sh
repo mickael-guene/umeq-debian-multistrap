@@ -11,6 +11,7 @@ VERSIONS="jessie testing"
 
 #push rootfs
 for arch in ${ARCHS}; do
+    cd ${SCRIPTDIR}
     # deploy key
     set +x
     openssl aes-256-cbc -K $encrypted_f1bb190f457f_key -iv $encrypted_f1bb190f457f_iv -in deploy_key_${arch}.enc -out deploy_key -d
