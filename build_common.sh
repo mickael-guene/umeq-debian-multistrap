@@ -59,6 +59,29 @@ wget https://raw.githubusercontent.com/mickael-guene/umeq-static-build/master/bi
 chmod +x ${TMPDIR}/rootfs/usr/bin/${UMEQ}
 ln -sf ./${UMEQ} ${TMPDIR}/rootfs/usr/bin/${QEMU}
 
+#tweak rootfs for docker
+#taken from debootstrab in docker.io contrib
+cat > "${TMPDIR}/rootfs/etc/apt/apt.conf.d/docker-no-languages" <<-'EOF'
+    # In Docker, we don't often need the "Translations" files, so we're just wasting
+    # time and space by downloading them, and this inhibits that.  For users that do
+    # need them, it's a simple matter to delete this file and "apt-get update". :)
+
+    Acquire::Languages "none";
+EOF
+cat > "${TMPDIR}/rootfs/etc/apt/apt.conf.d/docker-gzip-indexes" <<-'EOF'
+    # Since Docker users using "RUN apt-get update && apt-get install -y ..." in
+    # their Dockerfiles don't go delete the lists files afterwards, we want them to
+    # be as small as possible on-disk, so we explicitly request "gz" versions and
+    # tell Apt to keep them gzipped on-disk.
+
+    # For comparison, an "apt-get update" layer without this on a pristine
+    # "debian:wheezy" base image was "29.88 MB", where with this it was only
+    # "8.273 MB".
+
+    Acquire::GzipIndexes "true";
+    Acquire::CompressionTypes::Order:: "gz";
+EOF
+
 #build rootfs
 tar -czf ${output} -C ${TMPDIR}/rootfs .
 
