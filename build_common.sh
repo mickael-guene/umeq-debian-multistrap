@@ -83,6 +83,6 @@ cat > "${TMPDIR}/rootfs/etc/apt/apt.conf.d/docker-gzip-indexes" <<-'EOF'
 EOF
 
 #build rootfs
-tar -czf ${output} -C ${TMPDIR}/rootfs .
+tar --numeric-owner --owner=0 --group=0 -czf ${output} -C ${TMPDIR}/rootfs .
 
 cleanup
