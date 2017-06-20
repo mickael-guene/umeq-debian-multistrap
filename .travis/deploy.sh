@@ -7,7 +7,7 @@ SCRIPTDIR=`(cd $SCRIPTDIR ; pwd)`
 #ARCHS="arm64 armhf"
 #VERSIONS="jessie testing"
 ARCHS="arm64 armhf"
-VERSIONS="jessie testing"
+VERSIONS="jessie stretch testing"
 
 #push rootfs
 for arch in ${ARCHS}; do
