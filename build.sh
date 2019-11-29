@@ -5,7 +5,7 @@ SCRIPTDIR=`dirname $0`
 SCRIPTDIR=`(cd $SCRIPTDIR ; pwd)`
 
 ARCHS="arm64 armhf"
-VERSIONS="jessie stretch testing"
+VERSIONS="stretch testing"
 
 for arch in ${ARCHS}; do
     for version in ${VERSIONS}; do
